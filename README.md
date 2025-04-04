@@ -14,7 +14,7 @@ Frontend for URL shortening service built with React, TypeScript, and Vite.
 
 ```bash
 git clone https://github.com/nirbhay-growexxer/mikroUrl-FE
-cd mikro-url
+cd mikroUrl-FE
 ```
 
 2. Install dependencies
