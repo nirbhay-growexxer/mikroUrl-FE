@@ -60,7 +60,6 @@ const DashboardPage = () => {
               </Link>
             </div>
             <div className='flex items-center space-x-4'>
-              <span className='text-gray-700'>Welcome, {user?.name}</span>
               <Link
                 to='/profile'
                 className='text-gray-700 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium'

@@ -1,11 +1,15 @@
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/store/store';
+import { logout } from '@/store/authSlice';
 
 const LandingPage = () => {
-  const { isAuthenticated, user } = useSelector(
-    (state: RootState) => state.auth
-  );
+  const dispatch = useDispatch();
+  const { isAuthenticated } = useSelector((state: RootState) => state.auth);
+
+  const handleLogout = () => {
+    dispatch(logout());
+  };
 
   return (
     <div className='min-h-screen bg-gray-50'>
@@ -27,9 +31,6 @@ const LandingPage = () => {
             <div className='flex items-center space-x-4'>
               {isAuthenticated ? (
                 <>
-                  <span className='text-gray-700 text-sm font-medium'>
-                    Welcome, {user?.name || 'User'}
-                  </span>
                   <Link
                     to='/dashboard'
                     className='inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-indigo-600 bg-indigo-50 hover:bg-indigo-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
@@ -46,6 +47,14 @@ const LandingPage = () => {
                   >
                     Profile
                   </Link>
+                  <button
+                    onClick={handleLogout}
+                    className='inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-red-600 bg-red-50 hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500'
+                    aria-label='Sign out'
+                    tabIndex={0}
+                  >
+                    Sign out
+                  </button>
                 </>
               ) : (
                 <>
