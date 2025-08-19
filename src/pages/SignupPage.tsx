@@ -6,7 +6,8 @@ import { useDispatch } from 'react-redux';
 import { setCredentials } from '../store/authSlice';
 import { api } from '../lib/axios';
 import { API_ROUTES } from '../config/api-routes';
-import { User } from '../types/user';
+import { User, UserResponse } from '../types/user';
+import { AuthResponse } from '@/types/auth';
 
 const SignupPage = () => {
   const navigate = useNavigate();
@@ -33,9 +34,12 @@ const SignupPage = () => {
 
   const handleSignup = async (data: SignupFormData) => {
     try {
-      const response = await api.post(API_ROUTES.AUTH.SIGNUP, data);
+      const response = await api.post<AuthResponse>(
+        API_ROUTES.AUTH.SIGNUP,
+        data
+      );
       console.log(response.data);
-      dispatch(setCredentials(response.data as { user: User; token: string }));
+      dispatch(setCredentials(response.data.data));
       navigate('/profile');
     } catch (error) {
       console.error('Signup failed:', error);

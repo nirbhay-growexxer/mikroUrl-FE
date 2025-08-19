@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/store';
+import FeatureFlagWrapper from '../components/featureFlagWrapper';
 
 // Sample data for the dashboard
 const sampleData = {
@@ -255,6 +256,17 @@ const DashboardPage = () => {
                           >
                             Created
                           </th>
+                          <FeatureFlagWrapper
+                            flagName='showActions'
+                            fallback={null}
+                          >
+                            <th
+                              scope='col'
+                              className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
+                            >
+                              Action
+                            </th>
+                          </FeatureFlagWrapper>
                         </tr>
                       </thead>
                       <tbody className='bg-white divide-y divide-gray-200'>
@@ -274,6 +286,49 @@ const DashboardPage = () => {
                             <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
                               {link.createdAt}
                             </td>
+                            <FeatureFlagWrapper
+                              flagName='showActions'
+                              fallback={null}
+                            >
+                              <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+                                <button
+                                  className='mr-2 text-blue-500 hover:text-blue-700'
+                                  title='Edit'
+                                >
+                                  <svg
+                                    xmlns='http://www.w3.org/2000/svg'
+                                    className='h-5 w-5 inline'
+                                    viewBox='0 0 20 20'
+                                    fill='currentColor'
+                                  >
+                                    <path d='M17.414 2.586a2 2 0 00-2.828 0l-9.192 9.192a2 2 0 00-.497.878l-1 4A1 1 0 004 18a1 1 0 00.243-.03l4-1a2 2 0 00.878-.497l9.192-9.192a2 2 0 000-2.828zM5 16l-1-1 4-4 1 1-4 4zm9.192-9.192l-1.414 1.414-1.414-1.414 1.414-1.414 1.414 1.414z' />
+                                  </svg>
+                                </button>
+                                <FeatureFlagWrapper
+                                  flagName='removeURLOption'
+                                  fallback={null}
+                                >
+                                  <button
+                                    className='text-red-500 hover:text-red-700'
+                                    title='Delete'
+                                  >
+                                    <svg
+                                      xmlns='http://www.w3.org/2000/svg'
+                                      className='h-5 w-5 inline'
+                                      viewBox='0 0 20 20'
+                                      fill='currentColor'
+                                    >
+                                      <path
+                                        fillRule='evenodd'
+                                        d='M6 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm4 0a1 1 0 012 0v6a1 1 0 11-2 0V8z'
+                                        clipRule='evenodd'
+                                      />
+                                      <path d='M4 6h12v2H4V6zm2-2a2 2 0 012-2h4a2 2 0 012 2v2H6V4z' />
+                                    </svg>
+                                  </button>
+                                </FeatureFlagWrapper>
+                              </td>
+                            </FeatureFlagWrapper>
                           </tr>
                         ))}
                       </tbody>

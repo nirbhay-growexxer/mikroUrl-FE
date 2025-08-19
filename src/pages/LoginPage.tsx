@@ -7,6 +7,7 @@ import { setCredentials } from '../store/authSlice';
 import { api } from '../lib/axios';
 import { API_ROUTES } from '../config/api-routes';
 import { User } from '@/types/user';
+import { AuthResponse } from '@/types/auth';
 
 // Login form schema
 const loginSchema = z.object({
@@ -17,10 +18,6 @@ const loginSchema = z.object({
 type LoginFormData = z.infer<typeof loginSchema>;
 
 // Add this type definition after the LoginFormData type
-type AuthResponse = {
-  user: User;
-  token: string;
-};
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -40,7 +37,7 @@ const LoginPage = () => {
         API_ROUTES.AUTH.LOGIN,
         data
       );
-      dispatch(setCredentials(response.data));
+      dispatch(setCredentials(response.data.data));
       navigate('/profile');
     } catch (error) {
       console.error('Login failed:', error);

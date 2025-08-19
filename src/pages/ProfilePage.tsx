@@ -4,7 +4,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { RootState } from '../store/store';
 import { logout, setUser } from '../store/authSlice';
 import { api } from '../lib/axios';
-import { User } from '@/types/user';
+import { UserResponse } from '@/types/user';
 
 const ProfilePage = () => {
   const dispatch = useDispatch();
@@ -46,7 +46,7 @@ const ProfilePage = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      dispatch(setUser((response.data as { user: User }).user));
+      dispatch(setUser((response.data as UserResponse).data.user));
     } catch (err) {
       setError('Failed to load profile data. Please try again later.');
       console.error('Error fetching profile:', err);
@@ -122,7 +122,7 @@ const ProfilePage = () => {
         }
       );
 
-      dispatch(setUser((response.data as { user: User }).user));
+      dispatch(setUser((response.data as UserResponse).data.user));
       setIsEditing(false);
     } catch (err) {
       setUpdateError('Failed to update profile. Please try again later.');

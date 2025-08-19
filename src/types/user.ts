@@ -7,3 +7,11 @@ export interface User {
   updatedAt: string;
   // Add other user properties as needed
 }
+
+export interface UserResponse {
+  status: number;
+  message: string;
+  data: {
+    user: User;
+  };
+}
