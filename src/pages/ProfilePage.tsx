@@ -5,6 +5,7 @@ import { RootState } from '../store/store';
 import { logout, setUser } from '../store/authSlice';
 import { api } from '../lib/axios';
 import { UserResponse } from '@/types/user';
+import FeatureFlagWrapper from '@/components/featureFlagWrapper';
 
 const ProfilePage = () => {
   const dispatch = useDispatch();
@@ -174,22 +175,27 @@ const ProfilePage = () => {
                     Profile Information
                   </h2>
                   {!isEditing ? (
-                    <button
-                      onClick={() => setIsEditing(true)}
-                      className='inline-flex items-center px-3 py-1.5 border border-transparent text-sm font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
-                      aria-label='Edit profile'
-                      tabIndex={0}
+                    <FeatureFlagWrapper
+                      flagName='editProfileOption'
+                      fallback={null}
                     >
-                      <svg
-                        xmlns='http://www.w3.org/2000/svg'
-                        className='h-4 w-4 mr-1.5'
-                        viewBox='0 0 20 20'
-                        fill='currentColor'
+                      <button
+                        onClick={() => setIsEditing(true)}
+                        className='inline-flex items-center px-3 py-1.5 border border-transparent text-sm font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                        aria-label='Edit profile'
+                        tabIndex={0}
                       >
-                        <path d='M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z' />
-                      </svg>
-                      Edit
-                    </button>
+                        <svg
+                          xmlns='http://www.w3.org/2000/svg'
+                          className='h-4 w-4 mr-1.5'
+                          viewBox='0 0 20 20'
+                          fill='currentColor'
+                        >
+                          <path d='M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z' />
+                        </svg>
+                        Edit
+                      </button>
+                    </FeatureFlagWrapper>
                   ) : null}
                 </div>
 

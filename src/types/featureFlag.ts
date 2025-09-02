@@ -1,7 +1,11 @@
 export interface FeatureFlag {
   _id: string;
   name: string;
-  isEnabled: boolean;
+  enabledEnvs: {
+    dev: boolean;
+    stage: boolean;
+    prod: boolean;
+  };
 }
 export interface GetFeatureFlagAPIResponse {
   status: string;
