@@ -10,7 +10,6 @@ const ProfilePage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { user, token } = useSelector((state: RootState) => state.auth);
-  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -37,7 +36,6 @@ const ProfilePage = () => {
       return;
     }
 
-    setIsLoading(true);
     setError(null);
 
     try {
@@ -50,8 +48,6 @@ const ProfilePage = () => {
     } catch (err) {
       setError('Failed to load profile data. Please try again later.');
       console.error('Error fetching profile:', err);
-    } finally {
-      setIsLoading(false);
     }
   };
 

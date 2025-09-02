@@ -12,7 +12,7 @@ const featureFlagSlice = createSlice({
   initialState,
   reducers: {
     setFeatureFlags(state, action: PayloadAction<FeatureFlagsState>) {
-      return { ...action.payload };
+      state.flags = action.payload.flags;
     },
   },
 });

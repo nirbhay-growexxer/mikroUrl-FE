@@ -6,7 +6,6 @@ import { useDispatch } from 'react-redux';
 import { setCredentials } from '../store/authSlice';
 import { api } from '../lib/axios';
 import { API_ROUTES } from '../config/api-routes';
-import { User } from '@/types/user';
 import { AuthResponse } from '@/types/auth';
 
 // Login form schema

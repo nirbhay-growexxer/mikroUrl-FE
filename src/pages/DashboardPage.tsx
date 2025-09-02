@@ -1,6 +1,4 @@
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { RootState } from '../store/store';
 import FeatureFlagWrapper from '../components/featureFlagWrapper';
 
 // Sample data for the dashboard
@@ -44,8 +42,6 @@ const sampleData = {
 };
 
 const DashboardPage = () => {
-  const { user } = useSelector((state: RootState) => state.auth);
-
   return (
     <div className='min-h-screen bg-gray-50'>
       {/* Navigation */}
